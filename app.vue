@@ -1,75 +1,140 @@
 <script setup>
-const drawerLeft = ref(false)
-const drawerRight = ref(true)
+const drawerLeft = ref(true)
+const drawerRight = ref(false)
+const menuList = [
+  {
+    icon: 'dashboard',
+    label: 'Dashboard',
+    to: '/',
+    separator: true
+  },
+  {
+    icon: 'sell',
+    label: 'Vender',
+    to: '/vender',
+    separator: false
+  },
+  {
+    icon: 'local_mall',
+    label: 'Comprar',
+    to: '/comprar',
+    separator: true
+  },
+  {
+    icon: 'mdi-cash-minus',
+    label: 'Contas a pagar',
+    to: '/contas_pagar',
+    separator: false
+  },
+  {
+    icon: 'mdi-cash-plus',
+    label: 'Contas a receber',
+    to: '/contas_receber',
+    separator: false
+  },
+  {
+    icon: 'mdi-cash-register',
+    label: 'Caixa',
+    to: '/caixa',
+    separator: true
+  },
+  {
+    icon: 'mdi-account-group',
+    label: 'Funcionários',
+    to: '/funcionarios',
+    separator: false
+  },
+  {
+    icon: 'mdi-account-group',
+    label: 'Fornecedores',
+    to: '/fornecedores',
+    separator: false
+  },
+  {
+    icon: 'mdi-account-group',
+    label: 'Clientes',
+    to: '/clientes',
+    separator: true
+  },
+  {
+    icon: 'settings',
+    label: 'Configurações',
+    to: '/configuracoes',
+    separator: false
+  },
+]
+
 </script>
 
 <template>
   <div>
-    <q-layout view="lhh LpR lff" container style="height: 100vh"
-      :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
+    <q-layout view="hHr lpR fFr" container style="height: 100vh" :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
+
+      <!-- HEADER -->
       <q-header reveal :class="$q.dark.isActive ? 'bg-secondary' : 'bg-black'">
         <q-toolbar>
           <q-btn flat @click="drawerLeft = !drawerLeft" round dense icon="menu" />
-          <q-toolbar-title>Header</q-toolbar-title>
-          <q-btn flat @click="drawerRight = !drawerRight" round dense icon="menu" />
+          <q-toolbar-title>Mini-ERP</q-toolbar-title>
+          <q-btn flat @click="drawerRight = !drawerRight" round dense icon="mdi-chat" />
         </q-toolbar>
       </q-header>
+      <!-- END HEADER -->
 
+      <!-- FOOTER -->
       <q-footer>
         <q-toolbar>
-          <q-toolbar-title>Footer</q-toolbar-title>
+          <q-toolbar-title>Mini-ERP. Todos direitos reservados.</q-toolbar-title>
         </q-toolbar>
       </q-footer>
+      <!-- END FOOTER -->
 
+      <!-- LEFT DRAWER -->
       <q-drawer v-model="drawerLeft" :width="200" :breakpoint="700" bordered>
         <q-scroll-area class="fit">
-          <div class="q-pa-sm">
-            <div v-for="n in 50" :key="n">Drawer {{ n }} / 50</div>
-          </div>
+          <q-list>
+            <template v-for="(menuItem, index) in menuList" :key="index">
+              <NuxtLink :to="menuItem.to">
+                <q-item clickable v-ripple>
+                  <q-item-section avatar>
+                    <q-icon :name="menuItem.icon" />
+                  </q-item-section>
+                  <q-item-section>
+                    {{ menuItem.label }}
+                  </q-item-section>
+                </q-item>
+              </NuxtLink>
+              <q-separator :key="'sep' + index" v-if="menuItem.separator" />
+            </template>
+
+          </q-list>
         </q-scroll-area>
       </q-drawer>
+      <!-- END LEFT DRAWER -->
 
-      <q-drawer side="right" v-model="drawerRight" bordered :width="200" :breakpoint="500">
-        <q-scroll-area class="fit">
-          <div class="q-pa-sm">
-            <div v-for="n in 50" :key="n">Drawer {{ n }} / 50</div>
+      <!-- RIGHT DRAWER -->
+      <q-drawer class="flex flex-col justify-between" v-model="drawerRight" side="right" :width="500" :breakpoint="400">
+        <div class="q-pa-md row justify-center">
+          <div style="width: 100%;">
+            <q-chat-message name="me" :text="['hey, how are you?']" sent />
+            <q-chat-message name="Jane" :text="['doing fine, how r you?']" />
           </div>
-        </q-scroll-area>
+        </div>
+        <div>
+          <q-input outlined v-model="msg" @keyup.enter="send">
+            <template v-slot:append>
+              <q-btn flat round dense icon="send" @click="send" />
+            </template>
+          </q-input>
+        </div>
       </q-drawer>
+      <!-- END RIGHT DRAWER -->
 
+      <!-- MAIN CONTENT -->
       <q-page-container>
-        <q-page style="padding-top: 60px" class="q-pa-md">
-          <p v-for="n in 15" :key="n">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore
-            vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi
-            perferendis voluptate?
-          </p>
-
-          <q-page-sticky position="top-left" :offset="[18, 68]">
-            <q-btn round color="primary" icon="arrow_back" class="rotate-45" />
-          </q-page-sticky>
-          <q-page-sticky position="top-right" :offset="[18, 68]">
-            <q-btn round color="primary" icon="arrow_upward" class="rotate-45" />
-          </q-page-sticky>
-          <q-page-sticky position="bottom-left" :offset="[18, 18]">
-            <q-btn round color="primary" icon="arrow_forward" class="rotate-135" />
-          </q-page-sticky>
-          <q-page-sticky position="bottom-right" :offset="[18, 18]">
-            <q-btn round color="primary" icon="arrow_forward" class="rotate-45" />
-          </q-page-sticky>
-
-          <q-page-sticky position="top" expand class="bg-primary text-white">
-            <q-toolbar>
-              <q-btn flat round dense icon="map" />
-              <q-toolbar-title>Title</q-toolbar-title>
-            </q-toolbar>
-          </q-page-sticky>
-        </q-page>
-
-        <q-page-scroller position="bottom">
-          <q-btn fab icon="keyboard_arrow_up" color="red" />
-        </q-page-scroller>
+        <NuxtPage />
       </q-page-container>
+      <!-- END MAIN CONTENT -->
+
     </q-layout>
   </div>
 </template>

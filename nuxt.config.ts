@@ -5,5 +5,15 @@ export default defineNuxtConfig({
     'nuxt-quasar-ui',
     '@nuxtjs/tailwindcss'
   ],
-  quasar: { /* */ }
+  quasar: { 
+    plugins: [
+      'Dialog',
+      'Notify',
+    ],
+    extras: {
+      font: 'roboto-font',
+      fontIcons: ['material-icons', 'mdi-v7'],
+      animations: 'all',
+    },
+  }
 })

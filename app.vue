@@ -6,18 +6,30 @@ const menuList = [
     icon: 'dashboard',
     label: 'Dashboard',
     to: '/',
+    separator: false
+  },
+  {
+    icon: 'mdi-chart-bar',
+    label: 'Relatórios',
+    to: '/relatorios',
     separator: true
   },
   {
-    icon: 'sell',
+    icon: 'mdi-cart-plus',
     label: 'Vender',
     to: '/vender',
     separator: false
   },
   {
-    icon: 'local_mall',
+    icon: 'mdi-cart-arrow-down',
     label: 'Comprar',
     to: '/comprar',
+    separator: false
+  },
+  {
+    icon: 'mdi-package-variant-closed',
+    label: 'Estoque',
+    to: '/estoque',
     separator: true
   },
   {
@@ -138,3 +150,9 @@ const menuList = [
     </q-layout>
   </div>
 </template>
+
+<style>
+.q-layout-padding{
+  padding: 16px !important;
+}
+</style>

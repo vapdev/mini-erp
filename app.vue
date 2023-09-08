@@ -5,7 +5,7 @@ const drawerRight = ref(true)
 
 <template>
   <div>
-    <q-layout view="lhh LpR lff" container style="height: 100vh" class="shadow-2 rounded-borders"
+    <q-layout view="lhh LpR lff" container style="height: 100vh"
       :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
       <q-header reveal :class="$q.dark.isActive ? 'bg-secondary' : 'bg-black'">
         <q-toolbar>

@@ -1,4 +1,5 @@
 <script setup>
+import { useAuthStore } from "~/stores/useAuthStore";
 const drawerLeft = ref(true)
 const drawerRight = ref(false)
 const menuList = [
@@ -75,7 +76,10 @@ const menuList = [
         separator: false
     },
 ]
-
+const auth = useAuthStore();
+async function handleLogout() {
+    await auth.logout();
+}
 </script>
 
 <template>
@@ -118,7 +122,21 @@ const menuList = [
                     </template>
 
                 </q-list>
+                <q-list class="mt-10">
+                    <q-item clickable @click="handleLogout">
+                        <q-item-section avatar>
+                            <q-icon size="25px" name="mdi-logout" />
+                        </q-item-section>
+                        <q-item-section>
+                            <div color="primary">Sair</div>
+                        </q-item-section>
+                    </q-item>
+                    <q-item>
+                        <div class="mt-2">Logado como: {{ auth.user.name }}</div>
+                    </q-item>
+                </q-list>
             </q-scroll-area>
+
         </q-drawer>
         <!-- END LEFT DRAWER -->
 

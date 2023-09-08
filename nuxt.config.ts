@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     'nuxt-quasar-ui',
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
   ],
   quasar: { 
     plugins: [
@@ -15,5 +16,5 @@ export default defineNuxtConfig({
       fontIcons: ['material-icons', 'mdi-v7'],
       animations: 'all',
     },
-  }
+  },
 })

@@ -1,5 +1,6 @@
 <script setup>
-const columns = [
+
+const columns = ref([
     {
         name: 'id',
         required: true,
@@ -120,52 +121,49 @@ const columns = [
         field: 'usuario_id',
         sortable: true
     }
-];
+]);
 
-const rows = ref([]);
-
-async function fetchFuncionarios() {
-    const { data } = await useApiFetch('/api/funcionarios');
-    rows.value = data.value.data;
-}
-
-fetchFuncionarios();
-
-const $q = useQuasar()
-import { FuncionarioDialog } from '#components'
-
-function handleAddFuncionario() {
-    $q.dialog({
-        component: FuncionarioDialog,
-        componentProps: {
-            title: 'Adicionar funcionário'
-        }
-    }).onOk(() => {
-        fetchFuncionarios()
-    })
-}
-
-function openDialog(row) {
-    $q.dialog({
-        component: FuncionarioDialog,
-        componentProps: {
-            title: 'Editar funcionário',
-            funcionario_id: row.id
-        }
-    }).onOk(() => {
-        fetchFuncionarios()
-    })
-}
+const form = ref({
+    nome: "",
+    email: "",
+    telefone: "",
+    cpf: "",
+    endereco: "",
+    cidade_id: "",
+    estado_id: "",
+    cep: "",
+    cargo: "",
+    salario: "",
+    data_nascimento: "",
+    data_admissao: "",
+    data_demissao: "",
+    status: "",
+    observacoes: "",
+    usuario_id: "",
+})
 
 </script>
 
 <template>
     <q-page padding>
         <PageTitle title="Funcionários" />
-        <div class="row mb-6">
-            <q-space />
-            <q-btn @click="handleAddFuncionario" label="Novo funcionário" color="primary" />
-        </div>
-        <DefaultTable @row-click="openDialog" :columns="columns" :rows="rows" />
+        <SimpleCrud title="Funcionários" v-model="form" :columns="columns" api_route="funcionarios">
+            <q-input dense outlined v-model="form.nome" label="Nome" />
+            <q-input dense outlined v-model="form.email" label="E-mail" />
+            <q-input dense outlined v-model="form.telefone" label="Telefone" />
+            <q-input dense outlined v-model="form.cpf" label="CPF" />
+            <q-input dense outlined v-model="form.endereco" label="Endereço" />
+            <q-input dense outlined v-model="form.cidade_id" label="Cidade" />
+            <q-input dense outlined v-model="form.estado_id" label="Estado" />
+            <q-input dense outlined v-model="form.cep" label="CEP" />
+            <q-input dense outlined v-model="form.cargo" label="Cargo" />
+            <q-input dense outlined v-model="form.salario" label="Salário" />
+            <q-input dense outlined v-model="form.data_nascimento" label="Data de nascimento" />
+            <q-input dense outlined v-model="form.data_admissao" label="Data de admissão" />
+            <q-input dense outlined v-model="form.data_demissao" label="Data de demissão" />
+            <q-input dense outlined v-model="form.status" label="Status" />
+            <q-input dense outlined v-model="form.observacoes" label="Observações" />
+            <q-input dense outlined v-model="form.usuario_id" label="Usuário" />
+        </SimpleCrud>
     </q-page>
 </template>

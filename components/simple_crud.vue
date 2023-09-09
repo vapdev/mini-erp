@@ -31,8 +31,6 @@ const props = defineProps({
 
 const item_id = ref(null)
 
-const form = ref({})
-
 async function handleSubmit() {
     const isUpdate = !!item_id.value;
     const url = `/api/${props.api_route}${isUpdate ? `/${item_id.value}` : ''}`;
@@ -40,7 +38,7 @@ async function handleSubmit() {
 
     const { error } = await useApiFetch(url, {
         method,
-        body: form.value
+        body: props.modelValue
     })
     if (!error.value) {
         $q.notify({
@@ -51,6 +49,7 @@ async function handleSubmit() {
             message: 'Registro salvo com sucesso!'
         })
         closeDialog()
+        fetchItems()
     } else {
         $q.notify({
             position: 'top',
@@ -83,9 +82,9 @@ const emit = defineEmits(['update:modelValue'])
 
 async function editItem(evt, row) {
     const { data } = await useApiFetch(`/api/${props.api_route}/${row.id}`)
-    form.value = data.value.data;
+    const form = data.value.data;
     item_id.value = row.id
-    emit('update:modelValue', form.value)
+    emit('update:modelValue', form)
     showDialog.value = true
 
 }

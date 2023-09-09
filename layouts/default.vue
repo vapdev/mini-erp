@@ -80,6 +80,10 @@ const auth = useAuthStore();
 async function handleLogout() {
     await auth.logout();
 }
+const send = () => {
+
+}
+
 </script>
 
 <template>
@@ -149,7 +153,7 @@ async function handleLogout() {
                 </div>
             </div>
             <div>
-                <q-input outlined v-model="msg" @keyup.enter="send">
+                <q-input outlined @keyup.enter="send">
                     <template v-slot:append>
                         <q-btn flat round dense icon="send" @click="send" />
                     </template>

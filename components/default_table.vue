@@ -17,8 +17,16 @@ const props = defineProps({
         default: 'id'
     }
 })
+
+const emit = defineEmits([
+    'row-click'
+])
+
+function handleRowClick(evt, row) {
+    emit('row-click', row)
+}
 </script>
 
 <template>
-    <q-table :title="title" :rows="rows" :columns="columns" :row-key="rowKey" />
+    <q-table @row-click="handleRowClick" :title="title" :rows="rows" :columns="columns" :row-key="rowKey" />
 </template>

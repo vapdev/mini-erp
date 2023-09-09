@@ -1,130 +1,171 @@
 <script setup>
 const columns = [
     {
-        name: 'name',
+        name: 'id',
         required: true,
-        label: 'Dessert (100g serving)',
+        label: 'ID',
         align: 'left',
-        field: row => row.name,
-        format: val => `${val}`,
+        field: 'id',
         sortable: true
     },
-    { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
-    { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-    { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-    { name: 'protein', label: 'Protein (g)', field: 'protein' },
-    { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
-    { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
-    { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
-]
-
-const rows = [
     {
-        name: 'Frozen Yogurt',
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        sodium: 87,
-        calcium: '14%',
-        iron: '1%'
+        name: 'nome',
+        align: 'left',
+        label: 'Nome',
+        field: 'nome',
+        sortable: true
     },
     {
-        name: 'Ice cream sandwich',
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        sodium: 129,
-        calcium: '8%',
-        iron: '1%'
+        name: 'email',
+        align: 'left',
+        label: 'Email',
+        field: 'email',
+        sortable: true
     },
     {
-        name: 'Eclair',
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        sodium: 337,
-        calcium: '6%',
-        iron: '7%'
+        name: 'telefone',
+        align: 'left',
+        label: 'Telefone',
+        field: 'telefone',
+        sortable: true
     },
     {
-        name: 'Cupcake',
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-        sodium: 413,
-        calcium: '3%',
-        iron: '8%'
+        name: 'cpf',
+        align: 'left',
+        label: 'CPF',
+        field: 'cpf',
+        sortable: true
     },
     {
-        name: 'Gingerbread',
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9,
-        sodium: 327,
-        calcium: '7%',
-        iron: '16%'
+        name: 'endereco',
+        align: 'left',
+        label: 'Endereço',
+        field: 'endereco',
+        sortable: true
     },
     {
-        name: 'Jelly bean',
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0,
-        sodium: 50,
-        calcium: '0%',
-        iron: '0%'
+        name: 'cidade_id',
+        align: 'left',
+        label: 'Cidade ID',
+        field: 'cidade_id',
+        sortable: true
     },
     {
-        name: 'Lollipop',
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-        sodium: 38,
-        calcium: '0%',
-        iron: '2%'
+        name: 'estado_id',
+        align: 'left',
+        label: 'Estado ID',
+        field: 'estado_id',
+        sortable: true
     },
     {
-        name: 'Honeycomb',
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-        sodium: 562,
-        calcium: '0%',
-        iron: '45%'
+        name: 'cep',
+        align: 'left',
+        label: 'CEP',
+        field: 'cep',
+        sortable: true
     },
     {
-        name: 'Donut',
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9,
-        sodium: 326,
-        calcium: '2%',
-        iron: '22%'
+        name: 'cargo',
+        align: 'left',
+        label: 'Cargo',
+        field: 'cargo',
+        sortable: true
     },
     {
-        name: 'KitKat',
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        sodium: 54,
-        calcium: '12%',
-        iron: '6%'
+        name: 'salario',
+        align: 'left',
+        label: 'Salário',
+        field: 'salario',
+        sortable: true
+    },
+    {
+        name: 'data_nascimento',
+        align: 'left',
+        label: 'Data de Nascimento',
+        field: 'data_nascimento',
+        sortable: true
+    },
+    {
+        name: 'data_admissao',
+        align: 'left',
+        label: 'Data de Admissão',
+        field: 'data_admissao',
+        sortable: true
+    },
+    {
+        name: 'data_demissao',
+        align: 'left',
+        label: 'Data de Demissão',
+        field: 'data_demissao',
+        sortable: true
+    },
+    {
+        name: 'status',
+        align: 'left',
+        label: 'Status',
+        field: 'status',
+        sortable: true
+    },
+    {
+        name: 'observacoes',
+        align: 'left',
+        label: 'Observações',
+        field: 'observacoes',
+        sortable: true
+    },
+    {
+        name: 'usuario_id',
+        align: 'left',
+        label: 'Usuário ID',
+        field: 'usuario_id',
+        sortable: true
     }
-]
+];
+
+const rows = ref([]);
+
+async function fetchFuncionarios() {
+    const { data } = await useApiFetch('/api/funcionarios');
+    rows.value = data.value.data;
+}
+
+fetchFuncionarios();
+
+const $q = useQuasar()
+import { FuncionarioDialog } from '#components'
+
+function handleAddFuncionario() {
+    $q.dialog({
+        component: FuncionarioDialog,
+        componentProps: {
+            title: 'Adicionar funcionário'
+        }
+    }).onOk(() => {
+        fetchFuncionarios()
+    })
+}
+
+function openDialog(row) {
+    $q.dialog({
+        component: FuncionarioDialog,
+        componentProps: {
+            title: 'Editar funcionário',
+            funcionario_id: row.id
+        }
+    }).onOk(() => {
+        fetchFuncionarios()
+    })
+}
+
 </script>
 
 <template>
     <q-page padding>
         <PageTitle title="Funcionários" />
-        <DefaultTable :columns="columns" :rows="rows" />
+        <div class="row mb-6">
+            <q-space />
+            <q-btn @click="handleAddFuncionario" label="Novo funcionário" color="primary" />
+        </div>
+        <DefaultTable @row-click="openDialog" :columns="columns" :rows="rows" />
     </q-page>
 </template>

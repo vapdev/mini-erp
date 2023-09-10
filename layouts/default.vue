@@ -29,9 +29,15 @@ const menuList = [
     },
     {
         icon: 'mdi-package-variant-closed',
-        label: 'Estoque',
-        to: '/estoque',
+        label: 'Produtos',
+        to: '/produtos',
         separator: true
+    },
+    {
+        icon: 'mdi-cash-fast',
+        label: 'Registros de caixa',
+        to: '/caixa_registros',
+        separator: false
     },
     {
         icon: 'mdi-cash-minus',
@@ -47,8 +53,8 @@ const menuList = [
     },
     {
         icon: 'mdi-cash-register',
-        label: 'Caixa',
-        to: '/caixa',
+        label: 'Caixas',
+        to: '/caixas',
         separator: true
     },
     {

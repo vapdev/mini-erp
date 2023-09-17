@@ -1,5 +1,4 @@
 <script setup>
-
 const columns = ref([
     {
         name: 'id',
@@ -38,31 +37,45 @@ const columns = ref([
         sortable: true
     },
     {
-        name: 'endereco',
+        name: 'rua',
         align: 'left',
-        label: 'Endereço',
-        field: 'endereco',
+        label: 'Rua',
+        field: 'rua',
         sortable: true
     },
     {
-        name: 'cidade_id',
+        name: 'numero',
         align: 'left',
-        label: 'Cidade ID',
-        field: 'cidade_id',
+        label: 'Número',
+        field: 'numero',
         sortable: true
     },
     {
-        name: 'estado_id',
+        name: 'bairro',
         align: 'left',
-        label: 'Estado ID',
-        field: 'estado_id',
+        label: 'Bairro',
+        field: 'bairro',
         sortable: true
     },
     {
-        name: 'cep',
+        name: 'complemento',
         align: 'left',
-        label: 'CEP',
-        field: 'cep',
+        label: 'Complemento',
+        field: 'complemento',
+        sortable: true
+    },
+    {
+        name: 'cidade',
+        align: 'left',
+        label: 'Cidade',
+        field: 'cidade',
+        sortable: true
+    },
+    {
+        name: 'estado',
+        align: 'left',
+        label: 'Estado',
+        field: 'estado',
         sortable: true
     },
     {
@@ -77,6 +90,13 @@ const columns = ref([
         align: 'left',
         label: 'Salário',
         field: 'salario',
+        sortable: true
+    },
+    {
+        name: 'sexo',
+        align: 'left',
+        label: 'Sexo',
+        field: 'sexo',
         sortable: true
     },
     {
@@ -115,55 +135,66 @@ const columns = ref([
         sortable: true
     },
     {
-        name: 'usuario_id',
+        name: 'user_id',
         align: 'left',
-        label: 'Usuário ID',
-        field: 'usuario_id',
+        label: 'User ID',
+        field: 'user_id',
         sortable: true
+    },
+    {
+        name: 'actions',
+        label: 'Ações',
+        field: 'actions'
     }
-]);
+])
 
 const form = ref({
+    id: "",
     nome: "",
     email: "",
     telefone: "",
     cpf: "",
-    endereco: "",
-    cidade_id: "",
-    estado_id: "",
-    cep: "",
+    rua: "",
+    numero: "",
+    bairro: "",
+    complemento: "",
+    cidade: "",
+    estado: "",
     cargo: "",
     salario: "",
+    sexo: "",
     data_nascimento: "",
     data_admissao: "",
     data_demissao: "",
     status: "",
     observacoes: "",
-    usuario_id: "",
+    user_id: ""
 })
-
 </script>
 
 <template>
     <q-page padding>
-        <PageTitle title="Funcionários" />
+        <PageTitle title="Funcionários" /> 
         <SimpleCrud title="Funcionários" v-model="form" :columns="columns" api_route="funcionarios">
             <q-input dense outlined v-model="form.nome" label="Nome" />
             <q-input dense outlined v-model="form.email" label="E-mail" />
             <q-input dense outlined v-model="form.telefone" label="Telefone" />
             <q-input dense outlined v-model="form.cpf" label="CPF" />
-            <q-input dense outlined v-model="form.endereco" label="Endereço" />
-            <q-input dense outlined v-model="form.cidade_id" label="Cidade" />
-            <q-input dense outlined v-model="form.estado_id" label="Estado" />
-            <q-input dense outlined v-model="form.cep" label="CEP" />
+            <q-input dense outlined v-model="form.rua" label="Rua" />
+            <q-input dense outlined v-model="form.numero" label="Número" />
+            <q-input dense outlined v-model="form.bairro" label="Bairro" />
+            <q-input dense outlined v-model="form.complemento" label="Complemento" />
+            <q-input dense outlined v-model="form.cidade" label="Cidade" />
+            <q-input dense outlined v-model="form.estado" label="Estado" />
             <q-input dense outlined v-model="form.cargo" label="Cargo" />
             <q-input dense outlined v-model="form.salario" label="Salário" />
-            <q-input dense outlined v-model="form.data_nascimento" label="Data de nascimento" />
-            <q-input dense outlined v-model="form.data_admissao" label="Data de admissão" />
-            <q-input dense outlined v-model="form.data_demissao" label="Data de demissão" />
+            <q-input dense outlined v-model="form.sexo" label="Sexo" />
+            <q-input dense outlined v-model="form.data_nascimento" label="Data de Nascimento" />
+            <q-input dense outlined v-model="form.data_admissao" label="Data de Admissão" />
+            <q-input dense outlined v-model="form.data_demissao" label="Data de Demissão" />
             <q-input dense outlined v-model="form.status" label="Status" />
             <q-input dense outlined v-model="form.observacoes" label="Observações" />
-            <q-input dense outlined v-model="form.usuario_id" label="Usuário" />
+            <q-input dense outlined v-model="form.user_id" label="User ID" />
         </SimpleCrud>
     </q-page>
 </template>

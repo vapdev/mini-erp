@@ -11,17 +11,17 @@ const columns = ref([
         sortable: true
     },
     {
-        name: 'descricao',
+        name: 'origem_id',
         align: 'left',
-        label: 'Descrição',
-        field: 'descricao',
+        label: 'Origem ID',
+        field: 'origem_id',
         sortable: true
     },
     {
-        name: 'valor',
+        name: 'origem',
         align: 'left',
-        label: 'Valor',
-        field: 'valor',
+        label: 'Origem',
+        field: 'origem',
         sortable: true
     },
     {
@@ -39,10 +39,10 @@ const columns = ref([
         sortable: true
     },
     {
-        name: 'cliente_id',
+        name: 'valor',
         align: 'left',
-        label: 'Cliente ID',
-        field: 'cliente_id',
+        label: 'Valor',
+        field: 'valor',
         sortable: true
     },
     {
@@ -68,11 +68,11 @@ const columns = ref([
 
 const form = ref({
     id: "",
-    descricao: "",
-    valor: "",
+    origem_id: "",
+    origem: "",
     data_vencimento: "",
     data_pagamento: null,
-    cliente_id: "",
+    valor: "",
     created_at: "",
     updated_at: ""
 });
@@ -80,13 +80,13 @@ const form = ref({
 
 <template>
     <q-page padding>
-        <PageTitle title="Contas a Receber" />
-        <SimpleCrud title="Contas a Receber" v-model="form" :columns="columns" api_route="contas-receber">
-            <q-input dense outlined v-model="form.descricao" label="Descrição" />
-            <q-input dense outlined v-model="form.valor" label="Valor" />
+        <PageTitle title="Parcelas" />
+        <SimpleCrud title="Parcelas" v-model="form" :columns="columns" api_route="parcelas">
+            <q-input dense outlined v-model="form.origem_id" label="Origem ID" />
+            <q-input dense outlined v-model="form.origem" label="Origem" />
             <q-date v-model="form.data_vencimento" label="Data de Vencimento" />
             <q-date v-model="form.data_pagamento" label="Data de Pagamento" />
-            <q-input dense outlined v-model="form.cliente_id" label="Cliente ID" />
+            <q-input dense outlined v-model="form.valor" label="Valor" />
         </SimpleCrud>
     </q-page>
 </template>

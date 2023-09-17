@@ -99,7 +99,7 @@ function closeDialog() {
 <template>
     <div>
         <q-dialog v-model="showDialog">
-            <q-card class="p-4 q-dialog-plugin" style="width: 1000px; max-width: 80vw;">
+            <q-card class="p-4 q-dialog-plugin" style="width: 876px; max-width: 80vw;">
                 <div class="text-2xl mb-4">{{ props.title }}</div>
                 <q-form @submit.prevent="handleSubmit">
                     <div class="row q-gutter-sm">
@@ -107,7 +107,7 @@ function closeDialog() {
                         </slot>
                     </div>
                 </q-form>
-                <q-card-actions align="right">
+                <q-card-actions class="mt-5" align="right">
                     <q-btn @click="closeDialog" label="Cancelar" color="secondary" />
                     <q-btn @click="handleSubmit" type="submit" label="Salvar" color="primary" />
                 </q-card-actions>

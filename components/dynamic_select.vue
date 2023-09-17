@@ -19,6 +19,10 @@ const options = ref([])
 const selectedObj = ref(null)
 
 onMounted(async () => {
+    if (props.modelValue) {
+        const { data } = await useApiFetch(`/api/${props.model}/${props.modelValue}`);
+        selectedObj.value = data.value.data;
+    }
     const { data } = await useApiFetch(`/api/${props.model}`);
     options.value = data.value.data;
 })

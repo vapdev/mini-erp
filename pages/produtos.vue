@@ -103,7 +103,7 @@ const form = ref({
             <q-input dense outlined v-model="form.quantidade" label="Quantidade" />
             <q-input dense outlined v-model="form.descricao" label="Descrição" />
             <q-input dense outlined v-model="form.imagem" label="Imagem" />
-            <q-input dense outlined v-model="form.categoria_id" label="Categoria ID" />
+            <DynamicSelect dense outlined v-model="form.categoria_id" model="categorias" />
             <q-toggle v-model="form.ativo" label="Ativo" />
         </SimpleCrud>
     </q-page>

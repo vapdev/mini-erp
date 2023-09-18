@@ -76,7 +76,8 @@ const columns = ref([
     {
         name: 'actions',
         label: 'Ações',
-        field: 'actions'
+        field: 'actions',
+        align: 'center'
     }
 ]);
 

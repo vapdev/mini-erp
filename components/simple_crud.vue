@@ -66,6 +66,7 @@ async function fetchItems() {
     const { data } = await useApiFetch(`/api/${props.api_route}`);
     rows.value = data.value.data;
 }
+await fetchItems()
 
 const showDialog = ref(false)
 const showDeleteDialog = ref(false)

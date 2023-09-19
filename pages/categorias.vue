@@ -18,13 +18,6 @@ const columns = ref([
         sortable: true
     },
     {
-        name: 'ativo',
-        align: 'left',
-        label: 'Ativo',
-        field: 'ativo',
-        sortable: true
-    },
-    {
         name: 'created_at',
         align: 'left',
         label: 'Criado em',
@@ -38,12 +31,6 @@ const columns = ref([
         field: 'updated_at',
         sortable: true
     },
-    {
-        name: 'actions',
-        label: 'Ações',
-        field: 'actions',
-        align: 'center'
-    }
 ]);
 
 const form = ref({
@@ -58,7 +45,7 @@ const form = ref({
 <template>
     <q-page padding>
         <PageTitle title="Categorias" />
-        <SimpleCrud title="Categorias" v-model="form" :columns="columns" api_route="categorias">
+        <SimpleCrud actions ativo title="Categorias" v-model="form" :columns="columns" api_route="categorias">
             <q-input dense outlined v-model="form.nome" label="Nome" />
             <q-toggle v-model="form.ativo" label="Ativo" />
         </SimpleCrud>

@@ -53,13 +53,6 @@ const columns = ref([
         sortable: true
     },
     {
-        name: 'ativo',
-        align: 'left',
-        label: 'Ativo',
-        field: 'ativo',
-        sortable: true
-    },
-    {
         name: 'created_at',
         align: 'left',
         label: 'Criado em',
@@ -73,12 +66,6 @@ const columns = ref([
         field: 'updated_at',
         sortable: true
     },
-    {
-        name: 'actions',
-        label: 'Ações',
-        field: 'actions',
-        align: 'center'
-    }
 ]);
 
 const form = ref({

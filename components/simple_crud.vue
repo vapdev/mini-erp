@@ -25,6 +25,16 @@ const props = defineProps({
     },
     modelValue: {
         required: true
+    },
+    actions: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    ativo: {
+        type: Boolean,
+        required: false,
+        default: false
     }
 })
 
@@ -124,12 +134,35 @@ function closeDialog() {
     showDialog.value = false
 }
 
+const columns_ref = ref([])
+
+onMounted(() => {
+    columns_ref.value = props.columns
+    if (props.ativo) {
+        columns_ref.value.push({
+            name: 'ativo',
+            align: 'left',
+            label: 'Ativo',
+            field: 'ativo',
+            sortable: true
+        })
+    }
+    if (props.actions) {
+        columns_ref.value.push({
+            name: 'actions',
+            label: 'Ações',
+            field: 'actions',
+            align: 'center'
+        })
+    }
+})
+
 </script>
 
 <template>
     <div>
         <q-dialog v-model="showDialog">
-            <q-card class="p-4 q-dialog-plugin" style="width: 876px; max-width: 80vw;">
+            <q-card class="p-4 q-dialog-plugin" style="width: 50rem; max-width: 50rem;">
                 <div class="text-2xl mb-4">{{ props.title }}</div>
                 <q-form @submit.prevent="handleSubmit">
                     <div class="row q-gutter-sm">
@@ -159,7 +192,7 @@ function closeDialog() {
             <q-space />
             <q-btn @click="handleAddItem" label="Novo registro" color="primary" />
         </div>
-        <q-table @row-click="editItem" :rows="rows" :columns="props.columns" row-key="id">
+        <q-table @row-click="editItem" :rows="rows" :columns="columns_ref" row-key="id">
             <template v-slot:body-cell-created_at="props">
                 <q-td :props="props">
                     <div>
@@ -174,7 +207,7 @@ function closeDialog() {
                     </div>
                 </q-td>
             </template>
-            <template v-slot:body-cell-ativo="props">
+            <template v-if="ativo" v-slot:body-cell-ativo="props">
                 <q-td :props="props">
                     <div>
                         <q-icon size="sm" name="check" v-if="props.row.ativo" color="green" />
@@ -182,10 +215,11 @@ function closeDialog() {
                     </div>
                 </q-td>
             </template>
-            <template v-slot:body-cell-actions="props">
+            <template v-if="actions" v-slot:body-cell-actions="props">
                 <q-td :props="props">
                     <div class="row justify-center items-center">
-                        <q-icon @click.stop="openDeleteDialog(props.row.id)" size="sm" name="delete" color="red" class="cursor-pointer" />
+                        <q-icon @click.stop="openDeleteDialog(props.row.id)" size="sm" name="delete" color="red"
+                            class="cursor-pointer" />
                     </div>
                 </q-td>
             </template>
